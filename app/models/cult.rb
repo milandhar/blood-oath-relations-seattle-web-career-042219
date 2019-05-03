@@ -47,4 +47,40 @@ class Cult
     end
   end
 
-end
+  def average_age
+    total_age = 0.0
+    total_members = 0.0
+
+    BloodOath.all.each do |oath|
+      if oath.cult == self
+        total_age += oath.follower.age.to_f
+        total_members += 1.0
+      end
+    end
+
+    total_age/total_members
+
+  end
+
+  def my_followers_mottos
+    BloodOath.all.map do |oath|
+      if oath.cult == self
+        puts oath.follower.life_motto
+      end
+    end.compact
+  end
+
+  def self.least_popular
+
+    Cult.all.sort_by do |cult|
+      cult.cult_population
+    end.first
+  end
+
+  def self.most_common_location
+
+    Cult.all.each_with_object(Hash.new(0))
+
+    end
+
+  end

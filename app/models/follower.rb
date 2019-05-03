@@ -36,4 +36,15 @@ class Follower
     end
 
   end
+
+  def my_cults_slogans
+    BloodOath.all.map do |oath|
+      if oath.follower == self
+        oath.cult.slogan
+      end
+    end.compact
+  end
+
+
+
 end
